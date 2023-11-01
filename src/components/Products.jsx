@@ -8,7 +8,8 @@ export default function Products() {
     isLoading,
     error,
     data: products,
-  } = useQuery(["products"], getProducts);
+    //} = useQuery(["products"], getProducts);  <-- 간소 했더니 에러나서 아래와 같이 queryKey, queryFn을 써줌
+  } = useQuery({ queryKey: ["products"], queryFn: getProducts });
   return (
     <>
       {isLoading && <p>Loading...</p>}

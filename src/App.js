@@ -11,10 +11,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
         <Navbar />
-        <Header />
+        {/* <Header /> */}
         <Outlet />
       </AuthContextProvider>
-  </QueryClientProvider>
+    </QueryClientProvider>
   )
 }
 
