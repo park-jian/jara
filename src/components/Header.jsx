@@ -15,7 +15,7 @@ export default function Header() {
     setCurrentIndex(index);
   }
   return (
-    <div className="flex justify-center items-center w-full h-20">
+    <div className="flex justify-center items-center w-full h-96">
       <Carousel
         showArrows={false}
         autoPlay={true}

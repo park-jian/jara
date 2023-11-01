@@ -10,11 +10,12 @@ export default function Products() {
     data: products,
     //} = useQuery(["products"], getProducts);  <-- 간소 했더니 에러나서 아래와 같이 queryKey, queryFn을 써줌
   } = useQuery({ queryKey: ["products"], queryFn: getProducts });
+
   return (
     <>
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      <ul>
+      <ul className="grid grid-cols-1 md:grid-cols-3 lg-grid-cols-4 gap-4 p-4">
         {products &&
           products.map((product) => (
             <ProductCard key={product.id} product={product} />
