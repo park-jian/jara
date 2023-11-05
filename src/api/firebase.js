@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged} from "firebase/auth";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, remove } from "firebase/database";
 import {v4 as uuid} from "uuid";
  
 const firebaseConfig = {
@@ -51,6 +51,7 @@ async function adminUser(user) {
   
 }
 
+//새로운 제품 등록
 export async function addNewProduct(product, image) {
   const id = uuid();
   return set(ref(database, `products/${id}`), {
@@ -62,6 +63,7 @@ export async function addNewProduct(product, image) {
   })
 }
 
+//제품 정보 가져오기
 export async function getProducts() {
   return get(ref(database, 'products')).then(snapshot => {
     if (snapshot.exists()) {
@@ -69,4 +71,23 @@ export async function getProducts() {
     } 
     return [];
   })
+}
+
+//장바구니 내용 가져오기
+export async function getCart(userId) {
+  return get(ref(database, `carts/${userId}`))
+  .then((snapshot) => {
+    const items = snapshot.val() || {};
+    return Object.values(items);
+  });
+}
+
+//장바구니에 추가 또는 수정
+export async function addOrUpdateToCart(userId, product) {
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
+}
+
+//장바구니 삭제
+export async function removeFromCart(userId, productId) {
+  return remove(ref(database, `carts/${userId}/${productId}`));
 }
