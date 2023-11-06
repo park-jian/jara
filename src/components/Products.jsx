@@ -9,7 +9,11 @@ export default function Products() {
     error,
     data: products,
     //} = useQuery(["products"], getProducts);  <-- 간소 했더니 에러나서 아래와 같이 queryKey, queryFn을 써줌
-  } = useQuery({ queryKey: ["products"], queryFn: getProducts });
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+    staleTime: 1000 * 60,
+  });
 
   return (
     <>
