@@ -7,9 +7,7 @@ export function AuthContextProvider({ children }) {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    onUserStateChange((user) => {
-      setUser(user);
-    });
+    onUserStateChange((user) => setUser(user));
   }, []);
   return (
     //login, logout은 key, value가 같아서 생략 가능
